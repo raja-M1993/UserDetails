@@ -20,16 +20,30 @@
     <apex:form >
         <table>
             
-            <tr><th>Name</th><th>Email</th><th>Username</th><th>Password</th><th>CreatedDate</th></tr>
+            <tr><th>Name</th><th>Email</th><th>Username</th><th>Password</th><th>CreatedDate</th><th></th></tr>
             <apex:repeat value="{!users}" var="alluser">
+                
                 <tr><td><apex:outputText value="{!alluser.Name}"/></td>
                     <td><apex:outputText value="{!alluser.Email__c}"/></td>
                     <td><apex:outputText value="{!alluser.username__c}"/></td>
                     <td><apex:outputText value="{!alluser.Passwordd__c}"/></td>
-                    <td><apex:outputText value="{!alluser.CreatedDate}"/></td></tr>
+                    <td><apex:outputText value="{!alluser.CreatedDate}"/></td>
+                    <td> <apex:inputHidden value="{!alluser.id}" />
+                        <apex:commandButton alt="showall" value="showall" onclick="userval('{!alluser.id}')" /></td>
+                </tr>
                 
             </apex:repeat>
+            <apex:actionfunction name="myActionFunction" action="{!showUserData}">
+                <apex:param name="userid" value=""/>
+            </apex:actionfunction>
             
         </table>
     </apex:form>
+    <script>
+    function userval(myid)
+    {
+        myActionFunction(myid);
+        alert(myid);
+    }
+    </script>
 </apex:page>
